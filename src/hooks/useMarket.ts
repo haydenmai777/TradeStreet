@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { MarketState, Company, NewsEvent, PricePoint, Portfolio } from '../types/market';
+import { MarketState, PricePoint } from '../types/market';
 import { generateCompanies } from '../api/generateCompanies';
 import { generateNews } from '../api/generateNews';
 import { calculateNewPrice, initializePriceHistory } from '../utils/priceEngine';

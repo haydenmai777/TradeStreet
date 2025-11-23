@@ -1,4 +1,4 @@
-import { Portfolio, Position, PricePoint } from '../types/market';
+import { Portfolio, Position } from '../types/market';
 
 const INITIAL_CASH = 100000;
 const PORTFOLIO_STORAGE_KEY = 'tradestreet_portfolio';

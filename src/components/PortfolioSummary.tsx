@@ -1,4 +1,4 @@
-import { Portfolio, Position } from '../types/market';
+import { Portfolio } from '../types/market';
 import { calculatePortfolioValue, calculatePnL } from '../utils/portfolio';
 
 interface PortfolioSummaryProps {

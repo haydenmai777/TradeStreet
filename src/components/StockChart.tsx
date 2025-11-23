@@ -28,6 +28,12 @@ export function StockChart({ priceHistory, ticker }: StockChartProps) {
 
   return (
     <div className="h-64">
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-sm text-gray-300">{ticker}</div>
+        <div className={`text-sm font-mono ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
+          ${latestPrice.toFixed(2)}
+        </div>
+      </div>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={displayData}>
           <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
