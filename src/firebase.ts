@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
+import { getFirestore } from 'firebase/firestore';
 
 // Use Vite env vars when available, fallback to the inline config provided.
 // For production it's recommended to set VITE_FIREBASE_* env vars instead of
@@ -18,6 +19,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Analytics can fail in non-browser contexts; guard it.
 let analytics: ReturnType<typeof getAnalytics> | undefined;
@@ -27,4 +29,4 @@ try {
   analytics = undefined;
 }
 
-export { app, auth, analytics, firebaseConfig };
+export { app, auth, db, analytics, firebaseConfig };

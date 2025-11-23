@@ -8,10 +8,18 @@ import { PortfolioSummary } from './components/PortfolioSummary';
 import AuthButton from './components/AuthButton';
 import { WalletConnect } from './components/WalletConnect';
 import { TCOBalance } from './components/TCOBalance';
+import { Leaderboard } from './components/Leaderboard';
+import { useLeaderboard } from './hooks/useLeaderboard';
 
 function App() {
   const { state, isLoading, error, handleBuy, handleSell } = useMarket();
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  
+  // Leaderboard hook - always call hooks, handle null state inside
+  const leaderboardData = useLeaderboard(
+    state?.portfolio || { cash: 0, positions: [] },
+    state?.prices || {}
+  );
 
   if (isLoading) {
     return (
@@ -73,6 +81,19 @@ function App() {
           </div>
         </div>
       </header>
+
+      {/* Leaderboard Section */}
+      {state && (
+        <div className="border-b border-gray-800 bg-gray-900">
+          <div className="container mx-auto px-4 py-4">
+            <Leaderboard
+              entries={leaderboardData.leaderboard}
+              isLoading={leaderboardData.isLoading}
+              userRank={leaderboardData.userRank}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6">
