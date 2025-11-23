@@ -33,14 +33,11 @@ export function Leaderboard({ entries, isLoading, userRank }: LeaderboardProps) 
 
   return (
     <div className="bg-gray-900 border border-gray-700 rounded p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-white font-bold text-lg">🏆 Leaderboard</h2>
-        {userRank !== null && address && (
-          <div className="text-sm text-gray-400">
-            Your Rank: <span className="text-green-400 font-bold">#{userRank}</span>
-          </div>
-        )}
-      </div>
+      {userRank !== null && address && (
+        <div className="mb-4 text-sm text-gray-400 text-center">
+          Your Rank: <span className="text-green-400 font-bold">#{userRank}</span>
+        </div>
+      )}
 
       {entries.length === 0 ? (
         <div className="text-gray-500 text-sm text-center py-4">

@@ -14,6 +14,7 @@ import { useLeaderboard } from './hooks/useLeaderboard';
 function App() {
   const { state, isLoading, error, handleBuy, handleSell } = useMarket();
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
   
   // Leaderboard hook - always call hooks, handle null state inside
   const leaderboardData = useLeaderboard(
@@ -74,6 +75,18 @@ function App() {
                 <div className="text-gray-400 text-sm">Market Status</div>
                 <div className="text-green-400 font-bold">● LIVE</div>
               </div>
+              <button
+                onClick={() => setShowLeaderboard(!showLeaderboard)}
+                className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded font-medium text-sm transition-colors flex items-center gap-2"
+              >
+                <span>🏆</span>
+                <span className="hidden sm:inline">Leaderboard</span>
+                {leaderboardData.userRank !== null && (
+                  <span className="bg-green-600 text-white text-xs px-2 py-0.5 rounded">
+                    #{leaderboardData.userRank}
+                  </span>
+                )}
+              </button>
               <TCOBalance />
               <WalletConnect />
               <AuthButton />
@@ -82,10 +95,19 @@ function App() {
         </div>
       </header>
 
-      {/* Leaderboard Section */}
-      {state && (
+      {/* Leaderboard Modal/Dropdown */}
+      {showLeaderboard && state && (
         <div className="border-b border-gray-800 bg-gray-900">
           <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-white font-bold text-lg">🏆 Leaderboard</h2>
+              <button
+                onClick={() => setShowLeaderboard(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
             <Leaderboard
               entries={leaderboardData.leaderboard}
               isLoading={leaderboardData.isLoading}
