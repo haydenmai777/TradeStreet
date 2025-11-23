@@ -13,7 +13,7 @@ export function calculateNewPrice(
   timeDelta: number = 1 // seconds since last update
 ): number {
   // Base random drift (normal distribution, mean 0)
-  const drift = (Math.random() - 0.5) * 0.02; // ±1% max drift per tick
+  const drift = (Math.random() - 0.5) * 0.02 * Math.max(1, timeDelta); // ±1% max drift per tick, scaled by timeDelta
   
   // Calculate sentiment impact from recent news (last 60 seconds)
   const now = Date.now();

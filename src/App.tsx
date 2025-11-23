@@ -5,7 +5,8 @@ import { StockChart } from './components/StockChart';
 import { TradePanel } from './components/TradePanel';
 import { NewsFeed } from './components/NewsFeed';
 import { PortfolioSummary } from './components/PortfolioSummary';
-import { Company } from './types/market';
+// types imported where needed; no direct imports here
+import AuthButton from './components/AuthButton';
 
 function App() {
   const { state, isLoading, error, handleBuy, handleSell } = useMarket();
@@ -30,7 +31,7 @@ function App() {
   }
 
   const selectedCompany = selectedTicker
-    ? state.companies.find((c) => c.ticker === selectedTicker)
+    ? state.companies.find((c) => c.ticker === selectedTicker) ?? null
     : null;
 
   const selectedPrice = selectedTicker ? state.prices[selectedTicker] : 0;
@@ -59,9 +60,12 @@ function App() {
               <h1 className="text-2xl font-bold text-green-400">TradeStreet</h1>
               <p className="text-gray-400 text-sm">AI Synthetic Market</p>
             </div>
-            <div className="text-right">
-              <div className="text-gray-400 text-sm">Market Status</div>
-              <div className="text-green-400 font-bold">● LIVE</div>
+            <div className="flex items-center gap-6">
+              <div className="text-right hidden sm:block">
+                <div className="text-gray-400 text-sm">Market Status</div>
+                <div className="text-green-400 font-bold">● LIVE</div>
+              </div>
+              <AuthButton />
             </div>
           </div>
         </div>
